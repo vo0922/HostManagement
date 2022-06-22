@@ -22,7 +22,18 @@
                 "Content-Type": "application/json",
             }
         }).then(response => {
+            if(!response.ok) {
+                throw new Error("에러가 발생했습니다.");
+            }
             console.log(form.name);
+            document.querySelector("#createName").value="";
+            document.querySelector("#ip").value="";
+            alert("등록에 성공했습니다.");
+        })
+        .catch(() => {
+            document.querySelector("#createName").value="";
+            document.querySelector("#ip").value="";
+            return alert("중복된 값이 존재합니다.");
         })
       });
 </script>

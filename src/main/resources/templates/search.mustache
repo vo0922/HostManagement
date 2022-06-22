@@ -10,6 +10,9 @@
 <script>
     const searchBtn = document.querySelector("#searchBtn");
     searchBtn.addEventListener("click", function() {
+        if(document.querySelector("#searchName").value == "") {
+            return alert("입력 값이 없습니다.");
+        }
         const form = {
             name: document.querySelector("#searchName").value,
         };
@@ -20,13 +23,22 @@
                 "Content-Type": "application/json",
             }
         })
-        .then((response) => response.json())
+        .then((response) => {
+            if(!response.ok) {
+                throw new Error("에러가 발생했습니다.");
+            }
+            return response.json()
+          }
+        )
         .then((data) => {
             console.log(data);
             const host = document.getElementById("host");
             host.innerHTML = "name : " + data.name + " ip: " + data.ip + " 생성일 : " + data.createDate + " 수정일 : " + data.lastupdatedDate +
             " <button type=button onClick=modify(" + data.id + "," + "'" + data.name + "'" + "," +  "'" + data.ip + "'" + ")>수정</button>" +
             " <button type=button onClick=de(" + data.id + ")>삭제</button>";
+        })
+        .catch(() =>{
+            return alert("조회 값이 없습니다.");
         })
       });
 
@@ -53,10 +65,19 @@
                 "Content-Type": "application/json",
             }
         })
-        .then((response) => response.json())
+        .then((response) => {
+            if(!response.ok) {
+                throw new Error("에러가 발생했습니다.");
+            }
+            return response.json();
+        })
         .then((data) => {
+            alert("수정에 성공하였습니다.");
             const host = document.getElementById("host");
             host.innerHTML = "";
+        })
+        .catch(() => {
+            return alert("수정에 실패하였습니다.");
         })
       }
 
@@ -68,11 +89,20 @@
                     "Content-Type": "application/json",
                 }
             })
-        .then((response) => response.json())
+        .then((response) => {
+            if(!response.ok) {
+                throw new Error("에러가 발생했습니다.");
+            }
+            return response.json();
+            })
         .then((data) => {
             console.log(data);
             const host = document.getElementById("host");
             host.innerHTML = "";
+            alert("삭제에 성공했습니다.");
+        })
+        .catch(() => {
+            return alert("삭제에 실패하였습니다.");
         })
       }
 

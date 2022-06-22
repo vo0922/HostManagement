@@ -19,11 +19,19 @@
                 "Content-Type": "application/json",
             }
         })
-        .then((response) => response.json())
+        .then((response) => {
+            if(!response.ok) {
+              throw new Error("에러가 발생했습니다.");
+            }
+            response.json()
+        })
         .then((data) => {
             console.log(data);
             const alive = document.getElementById("alive");
             alive.innerHTML = "name : " + data.name + " ip: " + data.ip + " 현재 alive 상태는 : " + data.state + "입니다.";
+        })
+        .catch(() => {
+            return alert("조회 값이 없습니다.");
         })
       });
 </script>

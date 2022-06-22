@@ -36,6 +36,7 @@ public class HostService {
     @Transactional
     public Hosts patch(HostsDto dto) {
         Hosts host = new Hosts(dto.getName(), dto.getIp());
+
         Hosts target = hostRepository.findById(dto.getId()).orElse(null);
         target.patch(host);
         return hostRepository.save(target);
