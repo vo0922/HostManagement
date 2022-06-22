@@ -1,0 +1,29 @@
+<div>
+    <label class="form-label">name</label>
+    <input type="text" class="form-control" name="aliveName" id="aliveName" />
+    <button type="button" id="aliveSearchBtn">조회</button>
+</div>
+<div id="alive">
+
+</div>
+<script>
+    const aliveSearchBtn = document.querySelector("#aliveSearchBtn");
+    aliveSearchBtn.addEventListener("click", function() {
+        const form = {
+            name: document.querySelector("#aliveName").value,
+        };
+        const url = "/api/alive/" + form.name
+        fetch(url, {
+            method: "get",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            const alive = document.getElementById("alive");
+            alive.innerHTML = "name : " + data.name + " ip: " + data.ip + " 현재 alive 상태는 : " + data.state + "입니다.";
+        })
+      });
+</script>

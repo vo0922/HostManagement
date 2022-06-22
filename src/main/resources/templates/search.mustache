@@ -1,0 +1,79 @@
+<div>
+    <label class="form-label">name</label>
+    <input type="text" class="form-control" name="searchName" id="searchName" />
+    <button type="button" id="searchBtn">조회</button>
+</div>
+<div id="host">
+
+</div>
+
+<script>
+    const searchBtn = document.querySelector("#searchBtn");
+    searchBtn.addEventListener("click", function() {
+        const form = {
+            name: document.querySelector("#searchName").value,
+        };
+        const url = "/api/host/" + form.name
+        fetch(url, {
+            method: "get",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            const host = document.getElementById("host");
+            host.innerHTML = "name : " + data.name + " ip: " + data.ip + " 생성일 : " + data.createDate + " 수정일 : " + data.lastupdatedDate +
+            " <button type=button onClick=modify(" + data.id + "," + "'" + data.name + "'" + "," +  "'" + data.ip + "'" + ")>수정</button>" +
+            " <button type=button onClick=de(" + data.id + ")>삭제</button>";
+        })
+      });
+
+      function modify (id, name, ip){
+         const host = document.getElementById("host");
+         host.innerHTML =
+         "<label class=form-label> name </label><input type=text value=" + name + " class=form-control name=modifyName id=modifyName />"
+         +"<label class=form-label> ip </label><input type=text value=" + ip + " name=modifyIp id=modifyIp />" +
+         "<input type=hidden id=id value=" + id + ">"
+         +" <button type=button id=modifybtn onClick=modifyreq()>수정</button>"
+      }
+
+      function modifyreq() {
+          const form = {
+            id: document.querySelector("#id").value,
+            name: document.querySelector("#modifyName").value,
+            ip: document.querySelector("#modifyIp").value
+          };
+          const url = "/api/host"
+          fetch(url, {
+            method: "PATCH",
+            body: JSON.stringify(form),
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            const host = document.getElementById("host");
+            host.innerHTML = "";
+        })
+      }
+
+      function de(id) {
+        const url = "/api/host/" + id
+            fetch(url, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            const host = document.getElementById("host");
+            host.innerHTML = "";
+        })
+      }
+
+</script>

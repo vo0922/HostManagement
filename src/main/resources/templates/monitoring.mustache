@@ -1,0 +1,36 @@
+<div>
+    <button type="button" id="monitoringBtn">조회</button>
+</div>
+<ul id="monitoring">
+
+</ul>
+<script>
+    const monitoringBtn = document.querySelector("#monitoringBtn");
+    var array = [];
+    monitoringBtn.addEventListener("click", function() {
+        const form = {
+            name: document.querySelector("#aliveName").value,
+        };
+        const url = "/api/alive/all"
+        fetch(url, {
+            method: "get",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            const monitoring = document.getElementById("monitoring");
+            monitoring.innerHTML = "";
+            array = data.map(function(data) {
+                const li = document.createElement("li");
+                li.setAttribute('id', data.id);
+                const text = document.createTextNode("name : " + data.hosts.name + " ip: " + data.hosts.ip + " state : " + data.state + " LastAlive : " + data.lastPing);
+                li.appendChild(text)
+                return monitoring.appendChild(li);
+            })
+        })
+
+      });
+</script>

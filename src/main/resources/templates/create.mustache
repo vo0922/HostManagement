@@ -1,0 +1,28 @@
+<div>
+    <label class="form-label">name</label>
+    <input type="text" class="form-control" name="createName" id="createName" />
+    <label class="form-label">ip</label>
+    <input type="text" name="ip" id="ip" />
+    <button type="button" id="createBtn">등록</button>
+</div>
+
+<script>
+    const createBtn = document.querySelector("#createBtn");
+
+    createBtn.addEventListener("click", function() {
+        const form = {
+            name: document.querySelector("#createName").value,
+            ip: document.querySelector("#ip").value
+        };
+        const url = "/api/host/"
+        fetch(url, {
+            method: "post",
+            body: JSON.stringify(form),
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }).then(response => {
+            console.log(form.name);
+        })
+      });
+</script>
