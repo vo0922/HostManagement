@@ -25,5 +25,15 @@ Alive테이블을 만들어 호스트테이블과 1:1연관관계 매핑을 해�
 조회 시간을 확인하기위해 실행시간 Aop를 만들어 TimeTrace어노테이션을 추가하여 1초이내에 응답을하는지 확인해보았습니다.
 
 *제약 사항
+UI를 html mustach파일로 구현하여 Springframework.boot 버전이 2.6.7 버전 이하여야 utf-8이 정상적으로 작동합니다.
+dependencies{
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-mustache'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.1'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
 
 *시험 결과 리스트
