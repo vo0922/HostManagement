@@ -56,5 +56,6 @@ public class HostService {
         hosts.stream()
                 .map(dto -> aliveService.search(dto.getName()))
                 .collect(Collectors.toList());
+
     }
 }

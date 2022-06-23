@@ -1,16 +1,19 @@
 <div>
-    <button type="button" id="monitoringBtn">조회</button>
+    <button type="button" id="monitoringBtn">전체 조회</button>
+</div>
+<div>
+    <label class="form-label">name</label>
+    <input type="text" class="form-control" name="monitoringSearchName" id="monitoringSearchName" />
+    <button type="button" id="monitoringSearchBtn">특정 조회</button>
 </div>
 <ul id="monitoring">
 
 </ul>
 <script>
     const monitoringBtn = document.querySelector("#monitoringBtn");
+    const monitoringSearchBtn = document.querySelector("#monitoringSearchBtn");
     var array = [];
     monitoringBtn.addEventListener("click", function() {
-        const form = {
-            name: document.querySelector("#aliveName").value,
-        };
         const url = "/api/alive/all"
         fetch(url, {
             method: "get",
@@ -31,6 +34,28 @@
                 return monitoring.appendChild(li);
             })
         })
-
+      });
+      monitoringSearchBtn.addEventListener("click", function() {
+        const form = {
+            name: document.querySelector("#monitoringSearchName").value,
+        };
+        const url = "/api/aliveping/" + form.name
+        fetch(url, {
+            method: "get",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            const monitoring = document.getElementById("monitoring");
+            monitoring.innerHTML = "";
+            const li = document.createElement("li");
+            li.setAttribute('id', data.id);
+            const text = document.createTextNode("name : " + data.hosts.name + " ip: " + data.hosts.ip + " state : " + data.state + " LastAlive : " + data.lastPing);
+            li.appendChild(text)
+            return monitoring.appendChild(li);
+        })
       });
 </script>

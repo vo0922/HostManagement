@@ -7,6 +7,7 @@ import com.example.HostManagement.repository.AliveRepository;
 import com.example.HostManagement.repository.HostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.Host;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import java.io.IOException;
@@ -53,6 +54,10 @@ public class AliveService {
         }
 
         return CompletableFuture.completedFuture(dto);
+    }
+
+    public Alive searchPing(Hosts hosts) {
+        return aliveRepository.findByHosts(hosts);
     }
 
     public List<Alive> findAll() {
