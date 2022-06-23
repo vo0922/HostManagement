@@ -15,7 +15,7 @@ name 또는 ip 데이터가 변경될경우 데이터를 update하는 로직을 
 4. 삭제 API (DeleteMapping)<br/>
 조회된 호스트정보를 삭제할 수 있도록 하였습니다.<br/>
 5. 현재 Alive 상태 조회 API (GetMapping)<br/>
-InetAddress.isReachable()를 사용하여 PingCheck(0.5초)를 하였습니다.<br/>
+InetAddress.isReachable()를 사용하여 PingCheck(timeout:500)를 하였습니다.<br/>
 Alive테이블을 만들어 호스트테이블과 1:1연관관계 매핑을 해주었습니다.<br/>
 특정 호스트 조회시 연관관계에 의하여 alive테이블과 호스트테이블 데이터를 같이 리턴해주도록 하였습니다.<br/>
 6. 호스트들의 Alive 모니터링 결과 조회 API (GetMapping)<br/>
