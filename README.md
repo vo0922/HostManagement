@@ -40,3 +40,7 @@ dependencies{<br/>
 *시험 결과 리스트
 ![image](https://user-images.githubusercontent.com/71069665/175227366-2819ccf1-fb53-4aef-a8cd-557180fe1156.png)
 
+임의의 Unreachable상태인 100개의 호스트 조회 
+![image](https://user-images.githubusercontent.com/71069665/175227989-2bf184c8-532c-44d6-afb2-d6dbba2d563a.png)
+
+
