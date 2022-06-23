@@ -26,14 +26,14 @@ Alive테이블을 만들어 호스트테이블과 1:1연관관계 매핑을 해�
 
 *제약 사항
 UI를 html mustach파일로 구현하여 Springframework.boot 버전이 2.6.7 버전 이하여야 utf-8이 정상적으로 작동합니다.
-dependencies{
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-mustache'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.1'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
+dependencies{<br/>
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'<br/>
+	implementation 'org.springframework.boot:spring-boot-starter-mustache'<br/>
+	implementation 'org.springframework.boot:spring-boot-starter-web'<br/>
+	compileOnly 'org.projectlombok:lombok'<br/>
+	annotationProcessor 'org.projectlombok:lombok'<br/>
+	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.1'<br/>
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'<br/>
+}<br/>
 
 *시험 결과 리스트
